@@ -59,6 +59,16 @@
 #ifndef HEADER_RAND_H
 #define HEADER_RAND_H
 
+#if defined(OPENSSL_SYS_WINDOWS)
+#include <windows.h>
+#undef X509_NAME
+#undef X509_EXTENSIONS
+#undef X509_CERT_PAIR
+#undef PKCS7_ISSUER_AND_SERIAL
+#undef OCSP_REQUEST
+#undef OCSP_RESPONSE
+#endif
+
 #include <stdlib.h>
 #include <openssl/ossl_typ.h>
 #include <openssl/e_os2.h>
