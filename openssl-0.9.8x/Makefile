@@ -13,8 +13,8 @@ SHLIB_MAJOR=0
 SHLIB_MINOR=9.8
 SHLIB_EXT=.dll.a
 PLATFORM=mingw
-OPTIONS= no-camellia no-capieng no-cms no-gmp no-jpake no-krb5 no-mdc2 no-montasm no-rc5 no-rfc3779 no-seed no-shared no-zlib no-zlib-dynamic
-CONFIGURE_ARGS=mingw
+OPTIONS= no-asm no-camellia no-capieng no-cms no-gmp no-jpake no-krb5 no-mdc2 no-montasm no-rc5 no-rfc3779 no-seed no-shared no-zlib no-zlib-dynamic
+CONFIGURE_ARGS=mingw no-asm
 SHLIB_TARGET=cygwin-shared
 
 # HERE indicates where this Makefile lives.  This can be used to indicate
@@ -60,7 +60,7 @@ OPENSSLDIR=/usr/local/ssl
 # PKCS1_CHECK - pkcs1 tests.
 
 CC= gcc
-CFLAG= -DOPENSSL_THREADS  -DDSO_WIN32 -mno-cygwin -DL_ENDIAN -fomit-frame-pointer -O3 -march=i486 -Wall -D_WIN32_WINNT=0x333 -DOPENSSL_BN_ASM_PART_WORDS -DOPENSSL_IA32_SSE2 -DSHA1_ASM -DMD5_ASM -DRMD160_ASM -DAES_ASM
+CFLAG= -DOPENSSL_THREADS  -DDSO_WIN32 -mno-cygwin -DL_ENDIAN -fomit-frame-pointer -O3 -march=i486 -Wall -D_WIN32_WINNT=0x333
 DEPFLAG= -DOPENSSL_NO_CAMELLIA -DOPENSSL_NO_CAPIENG -DOPENSSL_NO_CMS -DOPENSSL_NO_GMP -DOPENSSL_NO_JPAKE -DOPENSSL_NO_MDC2 -DOPENSSL_NO_RC5 -DOPENSSL_NO_RFC3779 -DOPENSSL_NO_SEED
 PEX_LIBS= 
 EX_LIBS= -lwsock32 -lgdi32
@@ -88,17 +88,17 @@ ASFLAG=$(CFLAG)
 PROCESSOR= 
 
 # CPUID module collects small commonly used assembler snippets
-CPUID_OBJ= x86cpuid-cof.o
-BN_ASM= bn86-cof.o co86-cof.o 
-DES_ENC= dx86-cof.o yx86-cof.o
-AES_ASM_OBJ= ax86-cof.o
-BF_ENC= bx86-cof.o
-CAST_ENC= cx86-cof.o
-RC4_ENC= rx86-cof.o rc4_skey.o
-RC5_ENC= r586-cof.o
-MD5_ASM_OBJ= mx86-cof.o
-SHA1_ASM_OBJ= sx86-cof.o s512sse2-cof.o
-RMD160_ASM_OBJ= rm86-cof.o
+CPUID_OBJ= 
+BN_ASM= bn_asm.o
+DES_ENC= des_enc.o fcrypt_b.o
+AES_ASM_OBJ= aes_core.o aes_cbc.o
+BF_ENC= bf_enc.o
+CAST_ENC= c_enc.o
+RC4_ENC= rc4_enc.o rc4_skey.o
+RC5_ENC= rc5_enc.o
+MD5_ASM_OBJ= 
+SHA1_ASM_OBJ= 
+RMD160_ASM_OBJ= 
 
 # KRB5 stuff
 KRB5_INCLUDES=
